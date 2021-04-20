@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:talkingdata_appanalytics_plugin/talkingdata_appanalytics_plugin.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('appanalytics');
