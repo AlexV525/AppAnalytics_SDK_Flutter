@@ -16,10 +16,10 @@ class TalkingDataAppAnalytics {
     return null;
   }
 
-  static Future<void> onPageStart(String pageName) async {
-    return await _channel
-        .invokeMethod('onPageStart', <String, dynamic>{'pageName': pageName});
-  }
+  static Future<void> onPageStart(String pageName) => _channel.invokeMethod(
+        'onPageStart',
+        <String, dynamic>{'pageName': pageName},
+      );
 
   static Future<void> onPageEnd(String pageName) => _channel.invokeMethod(
         'onPageEnd',
@@ -30,95 +30,89 @@ class TalkingDataAppAnalytics {
     required String eventID,
     String? eventLabel,
     Map<String, dynamic>? params,
-  }) async {
-    return await _channel.invokeMethod('onEvent', <String, dynamic>{
-      'eventID': eventID,
-      'eventLabel': eventLabel,
-      'params': params
-    });
-  }
+  }) =>
+      _channel.invokeMethod('onEvent', <String, dynamic>{
+        'eventID': eventID,
+        'eventLabel': eventLabel,
+        'params': params
+      });
 
   static Future<void> onEventWithValue({
     required String eventID,
     String? eventLabel,
     Map<String, dynamic>? params,
     double? value,
-  }) async {
-    return await _channel.invokeMethod('onEventWithValue', <String, dynamic>{
-      'eventID': eventID,
-      'eventLabel': eventLabel,
-      'params': params,
-      'value': value
-    });
-  }
+  }) =>
+      _channel.invokeMethod('onEventWithValue', <String, dynamic>{
+        'eventID': eventID,
+        'eventLabel': eventLabel,
+        'params': params,
+        'value': value
+      });
 
-  static Future<void> setGlobalKV(String key, Object value) async {
-    return await _channel.invokeMethod(
-        'setGlobalKV', <String, dynamic>{'key': key, 'value': value});
-  }
+  static Future<void> setGlobalKV(String key, Object value) =>
+      _channel.invokeMethod(
+        'setGlobalKV',
+        <String, dynamic>{'key': key, 'value': value},
+      );
 
-  static Future<void> removeGlobalKV(String key) async {
-    return await _channel
-        .invokeMethod('removeGlobalKV', <String, dynamic>{'key': key});
-  }
+  static Future<void> removeGlobalKV(String key) =>
+      _channel.invokeMethod('removeGlobalKV', <String, dynamic>{'key': key});
 
   static Future<void> onRegister({
     required String profileID,
     required ProfileType profileType,
     required String name,
-  }) async {
-    return await _channel.invokeMethod('onRegister', <String, dynamic>{
-      'profileID': profileID,
-      'profileType': profileType.toString().split('.')[1],
-      'name': name
-    });
-  }
+  }) =>
+      _channel.invokeMethod('onRegister', <String, dynamic>{
+        'profileID': profileID,
+        'profileType': profileType.toString().split('.')[1],
+        'name': name
+      });
 
   static Future<void> onLogin({
     required String profileID,
     required ProfileType profileType,
     required String name,
-  }) async {
-    return await _channel.invokeMethod('onLogin', <String, dynamic>{
-      'profileID': profileID,
-      'profileType': profileType.toString().split('.')[1],
-      'name': name
-    });
-  }
+  }) =>
+      _channel.invokeMethod('onLogin', <String, dynamic>{
+        'profileID': profileID,
+        'profileType': profileType.toString().split('.')[1],
+        'name': name
+      });
 
   static Future<void> onPlaceOrder({
     required String profileID,
     required Order order,
-  }) async {
-    return await _channel.invokeMethod('onPlaceOrder', <String, dynamic>{
-      'profileID': profileID,
-      'orderID': order.orderID,
-      'totalPrice': order.totalPrice,
-      'currencyType': order.currencyType,
-      'orderDetails': order._orderDetails
-    });
-  }
+  }) =>
+      _channel.invokeMethod('onPlaceOrder', <String, dynamic>{
+        'profileID': profileID,
+        'orderID': order.orderID,
+        'totalPrice': order.totalPrice,
+        'currencyType': order.currencyType,
+        'orderDetails': order._orderDetails
+      });
 
-  static Future<void> onOrderPaySucc(
-      {required String profileID,
-      required String payType,
-      required Order order}) async {
-    return await _channel.invokeMethod('onOrderPaySucc', <String, dynamic>{
-      'profileID': profileID,
-      'payType': payType,
-      'orderID': order.orderID,
-      'totalPrice': order.totalPrice,
-      'currencyType': order.currencyType,
-      'orderDetails': order._orderDetails
-    });
-  }
+  static Future<void> onOrderPaySucc({
+    required String profileID,
+    required String payType,
+    required Order order,
+  }) =>
+      _channel.invokeMethod('onOrderPaySucc', <String, dynamic>{
+        'profileID': profileID,
+        'payType': payType,
+        'orderID': order.orderID,
+        'totalPrice': order.totalPrice,
+        'currencyType': order.currencyType,
+        'orderDetails': order._orderDetails
+      });
 
   static Future<void> onAddItemToShoppingCart({
-    required String itemId,
-    required String category,
-    required String name,
-    required int unitPrice,
-    required int amount,
+    String? itemId,
+    String? category,
+    String? name,
+    int? unitPrice,
+    int? amount,
   }) =>
       _channel.invokeMethod('onAddItemToShoppingCart', <String, dynamic>{
         'itemID': itemId,
@@ -129,10 +123,10 @@ class TalkingDataAppAnalytics {
       });
 
   static Future<void> onViewItem({
-    required String itemId,
-    required String category,
-    required String name,
-    required int unitPrice,
+    String? itemId,
+    String? category,
+    String? name,
+    int? unitPrice,
   }) =>
       _channel.invokeMethod('onViewItem', <String, dynamic>{
         'itemID': itemId,
@@ -141,11 +135,13 @@ class TalkingDataAppAnalytics {
         'unitPrice': unitPrice
       });
 
-  static Future<void> onViewShoppingCart(ShoppingCart shoppingCart) async {
-    return await _channel.invokeMethod('onViewShoppingCart', <String, dynamic>{
-      'shoppingCartDetails': shoppingCart._shoppingCartDetails
-    });
-  }
+  static Future<void> onViewShoppingCart(ShoppingCart shoppingCart) =>
+      _channel.invokeMethod(
+        'onViewShoppingCart',
+        <String, dynamic>{
+          'shoppingCartDetails': shoppingCart._shoppingCartDetails,
+        },
+      );
 }
 
 enum ProfileType {
