@@ -42,5 +42,5 @@ app.*.map.json
 
 # Custom rules
 **/pubspec.lock
-**/ios/Podfile.lock
+**/Podfile.lock
 .env
